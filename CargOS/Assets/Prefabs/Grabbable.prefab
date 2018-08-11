@@ -22,8 +22,9 @@ GameObject:
   - component: {fileID: 212012544465974226}
   - component: {fileID: 61376259383952924}
   - component: {fileID: 50972377327342790}
+  - component: {fileID: 114829957165369272}
   m_Layer: 0
-  m_Name: r_canister
+  m_Name: Grabbable
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,6 +88,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114829957165369272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1437530408905572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d16ff87e46acea4985d6d6059862df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  takeTurn: 0
+  grabbed: 0
+  onBelt: 0
+  beltMovement: 0
 --- !u!212 &212012544465974226
 SpriteRenderer:
   m_ObjectHideFlags: 1
