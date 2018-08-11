@@ -24,6 +24,10 @@ public class Crain : MonoBehaviour {
             {
                 transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.x);
             }
+            if (wench.grabbedObject != null)
+            {
+                wench.grabbedObject.transform.position = wench.transform.position;
+            }
             if (Mathf.Abs(transform.position.x - targetPosition.x) < .01)
             {
                 wench.targetPosition = targetPosition;

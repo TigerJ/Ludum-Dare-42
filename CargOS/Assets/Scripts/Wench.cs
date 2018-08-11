@@ -7,6 +7,9 @@ public class Wench : MonoBehaviour {
     public bool isMoving;
     public Vector3 targetPosition;
     public float speed = .01f;
+    public bool overGrabbable;
+    public GameObject grabbaleObject;
+    public GameObject grabbedObject;
     // Use this for initialization
     void Start()
     {
@@ -26,7 +29,39 @@ public class Wench : MonoBehaviour {
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.y);
             }
+            if (grabbedObject != null)
+            {
+                grabbedObject.transform.position = transform.position;
+            }
+            if (Mathf.Abs(transform.position.y - targetPosition.y) < .04)
+            {
+                if (overGrabbable == true && grabbedObject == null)
+                {
+                    grabbedObject = grabbaleObject;
+                }
+                else if(grabbedObject!=null)
+                {
+                    grabbedObject = null;
+                }
+                isMoving = false;
+            }
+            
         }
-        if (Mathf.Abs(transform.position.y - targetPosition.y) < .04) isMoving = false;
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Grabbable")
+        {
+            grabbaleObject = collision.gameObject;
+            overGrabbable = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Grabbable")
+        {
+            overGrabbable = false;
+        }
     }
 }
