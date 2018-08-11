@@ -38,9 +38,13 @@ public class Wench : MonoBehaviour {
                 if (overGrabbable == true && grabbedObject == null)
                 {
                     grabbedObject = grabbaleObject;
+                    grabbedObject.GetComponent<Grabbable>().grabbed = true;
+                    grabbedObject.GetComponent<Grabbable>().beltMovement = false;
                 }
                 else if(grabbedObject!=null)
                 {
+                    grabbedObject.GetComponent<Grabbable>().grabbed = false;
+                    grabbedObject.GetComponent<Grabbable>().beltMovement = false;
                     grabbedObject = null;
                 }
                 isMoving = false;

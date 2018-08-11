@@ -6,22 +6,57 @@ public class Player : MonoBehaviour {
 
     string lastMoved;
     public Crain crain;
+    float moveTimer = 0;
+    float moveSpeed = 0.25f;
+    float turnTimer = 3;
+    float gameSpeed = 3;
 	// Use this for initialization
 	void Start () {
 		
 	}
 
 	void Update () {
-        if (Input.GetButtonDown("Left")) MovePlayer("Left");
-        if (Input.GetButtonDown("Right")) MovePlayer("Right");
-        if (Input.GetButtonDown("Down")) MovePlayer("Down");
-        if (Input.GetButtonDown("Up")) MovePlayer("Up");
-
+        if (Input.GetButtonUp("Left") || Input.GetButtonUp("Right") || Input.GetButtonUp("Up") || Input.GetButtonUp("Down")) moveTimer = 0;
+        if (Input.GetButton("Left") && moveTimer <= 0)
+        {
+            MovePlayer("Left");
+            moveTimer = moveSpeed;
+        }
+        else if (Input.GetButton("Right") && moveTimer <= 0)
+        {
+            MovePlayer("Right");
+            moveTimer = moveSpeed;
+        }
+        else if (Input.GetButton("Up") && moveTimer <= 0)
+        {
+            MovePlayer("Up");
+            moveTimer = moveSpeed;
+        }
+        else if (Input.GetButton("Down") && moveTimer <= 0)
+        {
+            MovePlayer("Down");
+            moveTimer = moveSpeed;
+        }
+        else if (Input.GetButton("Left") || Input.GetButton("Right") || Input.GetButton("Up") || Input.GetButton("Down") && moveTimer > 0)
+        {
+            moveTimer = moveTimer - Time.deltaTime;
+        }
         if (Input.GetButtonDown("Action"))
         {
             crain.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
             crain.isMoving = true;
         }
+
+
+        if (turnTimer > 0) turnTimer = turnTimer - Time.deltaTime;
+        if(turnTimer <=0)
+        {
+            Debug.Log("turn");
+            turnTimer = gameSpeed;
+            GameObject[] shipments = GameObject.FindGameObjectsWithTag("Grabbable");
+            foreach (GameObject shipment in shipments) shipment.GetComponent<Grabbable>().activateGrabbable();
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
