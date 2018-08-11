@@ -27,6 +27,6 @@ public class Wench : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.y);
             }
         }
-        if (Mathf.Abs(transform.position.y - targetPosition.y) < .01) isMoving = false;
+        if (Mathf.Abs(transform.position.y - targetPosition.y) < .04) isMoving = false;
     }
 }
