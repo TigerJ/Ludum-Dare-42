@@ -35,16 +35,19 @@ public class Wench : MonoBehaviour {
             }
             if (Mathf.Abs(transform.position.y - targetPosition.y) < .04)
             {
+                Grabbable grabby;
                 if (overGrabbable == true && grabbedObject == null)
                 {
                     grabbedObject = grabbaleObject;
-                    grabbedObject.GetComponent<Grabbable>().grabbed = true;
-                    grabbedObject.GetComponent<Grabbable>().beltMovement = false;
+                    grabby = grabbedObject.GetComponent<Grabbable>();
+                    grabby.grabbed = true;
+                    grabby.beltMovement = false;
+                    grabby.onBelt = false;
                 }
                 else if(grabbedObject!=null)
                 {
                     grabbedObject.GetComponent<Grabbable>().grabbed = false;
-                    grabbedObject.GetComponent<Grabbable>().beltMovement = false;
+                    grabbedObject.GetComponent<Grabbable>().newY = transform.position.y;
                     grabbedObject = null;
                 }
                 isMoving = false;

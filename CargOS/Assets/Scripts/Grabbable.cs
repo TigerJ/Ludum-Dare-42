@@ -8,7 +8,7 @@ public class Grabbable : MonoBehaviour {
     public bool onBelt = false;
     bool onTeleporter = false;
     public bool beltMovement = false;
-    float newY;
+    public float newY;
 	// Use this for initialization
 	void Start () {
         newY = transform.position.y;
