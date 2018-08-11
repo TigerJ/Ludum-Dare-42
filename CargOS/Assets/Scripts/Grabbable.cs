@@ -9,6 +9,7 @@ public class Grabbable : MonoBehaviour {
     bool onTeleporter = false;
     public bool beltMovement = false;
     public float newY;
+    GameObject teleporter;
 	// Use this for initialization
 	void Start () {
         newY = transform.position.y;
@@ -42,9 +43,21 @@ public class Grabbable : MonoBehaviour {
         {
             onBelt = true;
         }
+        if(collision.gameObject.tag == "Teleporter")
+        {
+            onTeleporter = true;
+            teleporter = collision.gameObject;
+        }
     }
     public void activateGrabbable()
     {
         if (grabbed == false) takeTurn = true;
+    }
+    public void checkTeleportation()
+    {
+        if(onTeleporter == true)
+        {
+            teleporter.GetComponent<TeleporterPad>().cargo = gameObject;
+        }
     }
 }

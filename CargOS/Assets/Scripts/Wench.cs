@@ -43,12 +43,16 @@ public class Wench : MonoBehaviour {
                     grabby.grabbed = true;
                     grabby.beltMovement = false;
                     grabby.onBelt = false;
+                    GetComponent<Animator>().SetBool("on", true);
                 }
                 else if(grabbedObject!=null)
                 {
                     grabbedObject.GetComponent<Grabbable>().grabbed = false;
                     grabbedObject.GetComponent<Grabbable>().newY = transform.position.y;
+                    grabbedObject.GetComponent<Grabbable>().checkTeleportation();
                     grabbedObject = null;
+                    GetComponent<Animator>().SetBool("on", false);
+                    
                 }
                 isMoving = false;
             }

@@ -1,9 +1,15 @@
 fileFormatVersion: 2
-guid: e5d69556ed325774aa1c542724f9aab5
+guid: 62cd7a74add9b5342a8bec5a2badec11
 TextureImporter:
   fileIDToRecycleName:
-    21300000: p_crain_0
-    21300002: p_crain_1
+    21300000: p_teleporter_pad_0
+    21300002: p_teleporter_pad_1
+    21300004: p_teleporter_pad_2
+    21300006: p_teleporter_pad_3
+    21300008: p_teleporter_pad_4
+    21300010: p_teleporter_pad_5
+    21300012: p_teleporter_pad_6
+    21300014: p_teleporter_pad_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -108,7 +114,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: p_crain_0
+      name: p_teleporter_pad_0
       rect:
         serializedVersion: 2
         x: 0
@@ -122,13 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c28ed42dcd0b5f74199c3826f808f09c
+      spriteID: 6865bca3057048a48b955a1101cf0870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: p_crain_1
+      name: p_teleporter_pad_1
       rect:
         serializedVersion: 2
         x: 16
@@ -142,7 +148,127 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d76906c0f0d1ab04cb3653e026f93674
+      spriteID: 6c4d993acf01ec64395a41c3a2075c67
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p_teleporter_pad_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13110a15977baa54d9589e1123571d4f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p_teleporter_pad_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8e2bf7f9262b2a4c827190c52e95a00
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p_teleporter_pad_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a95a0470470c6cd47bac6b198a19c63e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p_teleporter_pad_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f84e3429d39cad4db20ef40d7dccf7f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p_teleporter_pad_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde0078d7c8bce84ba2634b22f29824d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p_teleporter_pad_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c20ffd7538e72942a1bfb1576423bc4
       vertices: []
       indices: 
       edges: []

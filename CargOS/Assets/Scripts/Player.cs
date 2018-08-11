@@ -51,7 +51,6 @@ public class Player : MonoBehaviour {
         if (turnTimer > 0) turnTimer = turnTimer - Time.deltaTime;
         if(turnTimer <=0)
         {
-            Debug.Log("turn");
             turnTimer = gameSpeed;
             GameObject[] shipments = GameObject.FindGameObjectsWithTag("Grabbable");
             foreach (GameObject shipment in shipments) shipment.GetComponent<Grabbable>().activateGrabbable();
