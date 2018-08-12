@@ -13,6 +13,7 @@ public class TeleporterPad : MonoBehaviour {
     Color pink = new Color(.7254f, .1058f, .6557f);
     Color orange = new Color(1f, .3212f, .0f);
     public int type = 0;
+    public AudioSource sfx_teleport;
     // Use this for initialization
     void Start () {
 		
@@ -45,6 +46,7 @@ public class TeleporterPad : MonoBehaviour {
         if (teleported == true)
         {
             GetComponentInChildren<ParticleSystem>().Play();
+            sfx_teleport.Play();
             type = Random.Range(0, 3);
             ChangeColor();
             teleporterState = 1;

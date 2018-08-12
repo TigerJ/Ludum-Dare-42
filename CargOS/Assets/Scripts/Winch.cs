@@ -14,6 +14,9 @@ public class Winch : MonoBehaviour {
     public bool overTeleporter;
     public TeleporterPad overPad;
     public string direction;
+    public AudioSource item_drop;
+    public AudioSource item_pickup;
+    public AudioSource bad_player;
     // Use this for initialization
     void Start()
     {
@@ -39,6 +42,7 @@ public class Winch : MonoBehaviour {
                 Grabbable grabby;
                 if (overGrabbable == true && grabbedObject == null)
                 {
+                    item_pickup.Play();
                     grabbedObject = grabbaleObject;
                     parentContainer = grabbaleObject.GetComponentInParent<ParentContainer>();
                     grabby = grabbedObject.GetComponent<Grabbable>();
@@ -56,10 +60,12 @@ public class Winch : MonoBehaviour {
                         if (grabby.type != overPad.type)
                         {
                             //tell the player bad
+                            bad_player.Play();
                             isMoving = false;
                             return;
                         }
                     }
+                    item_drop.Play();
                     grabby.grabbed = false;
                     grabby.newY = transform.position.y;
                     if(overTeleporter) grabby.checkTeleportation();
@@ -71,6 +77,7 @@ public class Winch : MonoBehaviour {
                 else if(grabbedObject != null && overGrabbable == true)
                 {
                     //tell player bad
+                    bad_player.Play();
                 }
                 isMoving = false;
             }

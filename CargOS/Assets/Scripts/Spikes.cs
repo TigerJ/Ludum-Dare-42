@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    public AudioSource sfx_spike;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -17,6 +17,7 @@ public class Spikes : MonoBehaviour {
     {
         if(collision.tag == "Grabbable")
         {
+            sfx_spike.Play();
             Destroy(collision.gameObject);
             //do bad things here
         }

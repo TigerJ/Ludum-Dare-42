@@ -11,8 +11,9 @@ public class Player : MonoBehaviour {
     float turnTimer = 5;
     float gameSpeed = 5;
     float stopBelts = 0;
-	// Use this for initialization
-	void Start () {
+    public AudioSource belt_move;
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -65,14 +66,20 @@ public class Player : MonoBehaviour {
             GameObject[] belts = GameObject.FindGameObjectsWithTag("Belt");
             foreach (GameObject belt in belts) belt.GetComponent<Animator>().SetBool("move", true);
             stopBelts = 1;
-
+            belt_move.Play();
         }
         if (stopBelts <= 0)
         {
             GameObject[] belts = GameObject.FindGameObjectsWithTag("Belt");
             foreach (GameObject belt in belts) belt.GetComponent<Animator>().SetBool("move", false);
+            belt_move.Stop();
         }
-        if (stopBelts > 0) stopBelts = stopBelts - Time.deltaTime;
+        if (stopBelts > 0)
+        {
+            stopBelts = stopBelts - Time.deltaTime;
+            belt_move.pitch = Random.Range(.8f, 1.1f);
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
