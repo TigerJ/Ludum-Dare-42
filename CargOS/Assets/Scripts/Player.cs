@@ -7,9 +7,9 @@ public class Player : MonoBehaviour {
     string lastMoved;
     public Crane crane;
     float moveTimer = 0;
-    float moveSpeed = 0.05f;
-    float turnTimer = 3;
-    float gameSpeed = 3;
+    float moveSpeed = 0.1f;
+    float turnTimer = 5;
+    float gameSpeed = 5;
 	// Use this for initialization
 	void Start () {
 		
@@ -54,6 +54,8 @@ public class Player : MonoBehaviour {
             turnTimer = gameSpeed;
             GameObject[] shipments = GameObject.FindGameObjectsWithTag("Grabbable");
             foreach (GameObject shipment in shipments) shipment.GetComponent<Grabbable>().activateGrabbable();
+            GameObject[] ships = GameObject.FindGameObjectsWithTag("Ship");
+            foreach (GameObject ship in ships) ship.GetComponent<Ship>().takeTurn = true;
         }
 
     }

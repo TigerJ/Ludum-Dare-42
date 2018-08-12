@@ -8,6 +8,8 @@ TagManager:
   - Grabbable
   - Belt
   - Teleporter
+  - Ship
+  - Spawner
   layers:
   - Default
   - TransparentFX
