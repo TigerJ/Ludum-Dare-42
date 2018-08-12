@@ -12,6 +12,9 @@ public class TeleporterPad : MonoBehaviour {
     Color green = new Color(.1062f, .7264f, .2569f);
     Color pink = new Color(.7254f, .1058f, .6557f);
     Color orange = new Color(1f, .3212f, .0f);
+    Color blue = new Color(0f, .7070f, 1f);
+    Color yellow = new Color(.8f, .8f, .08f);
+    Color white = new Color(1f, 1f, 1f);
     public int type = 0;
     public AudioSource sfx_teleport;
     // Use this for initialization
@@ -47,7 +50,7 @@ public class TeleporterPad : MonoBehaviour {
         {
             GetComponentInChildren<ParticleSystem>().Play();
             sfx_teleport.Play();
-            type = Random.Range(0, 3);
+            type = Random.Range(0, 6);
             ChangeColor();
             teleporterState = 1;
             GetComponent<Animator>().SetInteger("state", teleporterState);
@@ -55,6 +58,7 @@ public class TeleporterPad : MonoBehaviour {
             teleported = false;
             teleporterCooldown = teleporterSpeed;
             Destroy(cargo);
+            GameObject.Find("Player").GetComponent<Player>().scorePoints();
         }
 
         if (cargo != null && ready == true) teleported = true;
@@ -77,6 +81,15 @@ public class TeleporterPad : MonoBehaviour {
                 break;
             case 2:
                 render.color = orange;
+                break;
+            case 3:
+                render.color = blue;
+                break;
+            case 4:
+                render.color = yellow;
+                break;
+            case 5:
+                render.color = white;
                 break;
         }
     }

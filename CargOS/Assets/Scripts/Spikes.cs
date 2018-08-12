@@ -18,6 +18,7 @@ public class Spikes : MonoBehaviour {
         if(collision.tag == "Grabbable")
         {
             sfx_spike.Play();
+            GameObject.Find("Player").GetComponent<Player>().Damage();
             Destroy(collision.gameObject);
             //do bad things here
         }

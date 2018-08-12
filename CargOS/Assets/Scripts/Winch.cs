@@ -12,6 +12,7 @@ public class Winch : MonoBehaviour {
     public GameObject grabbedObject;
     public ParentContainer parentContainer;
     public bool overTeleporter;
+    bool overBelt;
     public TeleporterPad overPad;
     public string direction;
     public AudioSource item_drop;
@@ -55,10 +56,20 @@ public class Winch : MonoBehaviour {
                 else if(grabbedObject!=null && overGrabbable == false)
                 {
                     grabby = grabbedObject.GetComponent<Grabbable>();
+                    if (overBelt == true)
+                    {
+                        Debug.Log("over belt");
+                        //tell the player bad
+                        bad_player.Play();
+                        isMoving = false;
+                        grabby.onBelt = false;
+                        return;
+                    }
                     if (overTeleporter == true)
                     {
                         if (grabby.type != overPad.type)
                         {
+                            Debug.Log("type mismatch");
                             //tell the player bad
                             bad_player.Play();
                             isMoving = false;
@@ -66,6 +77,7 @@ public class Winch : MonoBehaviour {
                         }
                     }
                     item_drop.Play();
+                    grabby.onBelt = false;
                     grabby.grabbed = false;
                     grabby.newY = transform.position.y;
                     if(overTeleporter) grabby.checkTeleportation();
@@ -78,6 +90,7 @@ public class Winch : MonoBehaviour {
                 {
                     //tell player bad
                     bad_player.Play();
+                    Debug.Log("over shipment");
                 }
                 isMoving = false;
             }
@@ -94,11 +107,22 @@ public class Winch : MonoBehaviour {
                 grabbaleObject = collision.gameObject;
             }
             overGrabbable = true;
+            if (grabbedObject != null)
+            {
+                if (collision.gameObject.GetInstanceID() == grabbedObject.GetInstanceID())
+                {
+                    overGrabbable = false;
+                }
+            }
         }
         if (collision.gameObject.tag == "Teleporter")
         {
             overTeleporter = true;
             overPad = collision.gameObject.GetComponent<TeleporterPad>();
+        }
+        if(collision.gameObject.tag == "Belt")
+        {
+            overBelt = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -111,6 +135,10 @@ public class Winch : MonoBehaviour {
         {
             overTeleporter = false;
             overPad = null;
+        }
+        if (collision.gameObject.tag == "Belt")
+        {
+            overBelt = false;
         }
     }
     //private void OnTriggerStay2D(Collider2D collision)

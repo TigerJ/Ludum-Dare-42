@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
 
     string lastMoved;
@@ -12,6 +13,10 @@ public class Player : MonoBehaviour {
     float gameSpeed = 5;
     float stopBelts = 0;
     public AudioSource belt_move;
+    public int health = 12;
+    public Image healthbar;
+    public Text scoreValue;
+    int score = 0;
     // Use this for initialization
     void Start () {
 		
@@ -111,5 +116,22 @@ public class Player : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
         }
+    }
+    public void Damage()
+    {
+        health = health - 1;
+        if(health == 0)
+        {
+            //end game
+            GameObject.Find("ScoreHolder").GetComponent<LastScore>().score = score;
+            SceneManager.LoadScene("end");
+
+        }
+        healthbar.fillAmount = health / 12f;
+    }
+    public void scorePoints()
+    {
+        score = score + 100;
+        scoreValue.text = score.ToString("D7");
     }
 }

@@ -15,6 +15,9 @@ public class Grabbable : MonoBehaviour {
     Color green = new Color(.1062f, .7264f, .2569f);
     Color pink = new Color(.7254f, .1058f, .6557f);
     Color orange = new Color(1f, .3212f, .0f);
+    Color blue = new Color(0f, .7070f, 1f);
+    Color yellow = new Color(.8f, .8f, .08f);
+    Color white = new Color(1f, 1f, 1f);
     public int type = 0;
     // Use this for initialization
     void Start () {
@@ -37,6 +40,15 @@ public class Grabbable : MonoBehaviour {
                 break;
             case 2:
                 render.color = orange;
+                break;
+            case 3:
+                render.color = blue;
+                break;
+            case 4:
+                render.color = yellow;
+                break;
+            case 5:
+                render.color = white;
                 break;
         }
     }
@@ -83,7 +95,7 @@ public class Grabbable : MonoBehaviour {
     }
     public void RollType()
     {
-        type = Random.Range(0, 3);
+        type = Random.Range(0, 6);
         ChangeColor();
     }
     void ChangeColor()
@@ -99,6 +111,15 @@ public class Grabbable : MonoBehaviour {
                 break;
             case 2:
                 render.color = orange;
+                break;
+            case 3:
+                render.color = blue;
+                break;
+            case 4:
+                render.color = yellow;
+                break;
+            case 5:
+                render.color = white;
                 break;
         }
     }
