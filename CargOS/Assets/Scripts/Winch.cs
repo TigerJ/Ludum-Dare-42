@@ -11,6 +11,9 @@ public class Winch : MonoBehaviour {
     public GameObject grabbaleObject;
     public GameObject grabbedObject;
     public ParentContainer parentContainer;
+    public bool overTeleporter;
+    public TeleporterPad overPad;
+    public string direction;
     // Use this for initialization
     void Start()
     {
@@ -20,7 +23,7 @@ public class Winch : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (isMoving == true && transform.position.y != targetPosition.y)
+        if (isMoving == true)
         {
             if (transform.position.y < targetPosition.y)
             {
@@ -30,26 +33,8 @@ public class Winch : MonoBehaviour {
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.y);
             }
-            if (grabbedObject != null)
-            {
-                if(parentContainer == null)
-                {
-                    grabbedObject.transform.position = transform.position;
-                }
-                else
-                {
-                    grabbedObject.transform.parent.position = transform.position - grabbedObject.transform.localPosition;
-                }
-
-                //Grabbable grabbedContainer = grabbedObject.GetComponent<Grabbable>();
-                //Vector3 connectedPosition;
-                //if(grabbedContainer.connectedUp!= null)
-                //{
-                //    //connectedPosition = 
-                //    grabbedContainer.connectedUp.transform.position = grabbedContainer.connectedUp.transform.position + positionChange;
-                //} 
-            }
-            if (Mathf.Abs(transform.position.y - targetPosition.y) < .04)
+            if (grabbedObject != null) grabbedObject.transform.position = transform.position;
+            if ((direction == "down" && transform.position.y >= targetPosition.y) || (direction == "up" && transform.position.y <= targetPosition.y))
             {
                 Grabbable grabby;
                 if (overGrabbable == true && grabbedObject == null)
@@ -65,9 +50,19 @@ public class Winch : MonoBehaviour {
                 }
                 else if(grabbedObject!=null && overGrabbable == false)
                 {
-                    grabbedObject.GetComponent<Grabbable>().grabbed = false;
-                    grabbedObject.GetComponent<Grabbable>().newY = transform.position.y;
-                    grabbedObject.GetComponent<Grabbable>().checkTeleportation();
+                    grabby = grabbedObject.GetComponent<Grabbable>();
+                    if (overTeleporter == true)
+                    {
+                        if (grabby.type != overPad.type)
+                        {
+                            //tell the player bad
+                            isMoving = false;
+                            return;
+                        }
+                    }
+                    grabby.grabbed = false;
+                    grabby.newY = transform.position.y;
+                    if(overTeleporter) grabby.checkTeleportation();
                     grabbedObject = null;
                     parentContainer = null;
                     GetComponent<Animator>().SetBool("on", false);
@@ -93,12 +88,22 @@ public class Winch : MonoBehaviour {
             }
             overGrabbable = true;
         }
+        if (collision.gameObject.tag == "Teleporter")
+        {
+            overTeleporter = true;
+            overPad = collision.gameObject.GetComponent<TeleporterPad>();
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Grabbable")
         {
             overGrabbable = false;
+        }
+        if (collision.gameObject.tag == "Teleporter")
+        {
+            overTeleporter = false;
+            overPad = null;
         }
     }
     //private void OnTriggerStay2D(Collider2D collision)

@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     float moveSpeed = 0.1f;
     float turnTimer = 5;
     float gameSpeed = 5;
+    float stopBelts = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -45,6 +46,10 @@ public class Player : MonoBehaviour {
         {
             crane.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
             crane.isMoving = true;
+            if (crane.transform.position.x >= transform.position.x) crane.direction = "left";
+            else crane.direction = "right";
+            if (crane.winch.transform.position.y >= transform.position.y) crane.winch.direction = "up";
+            else crane.winch.direction = "down";
         }
 
 
@@ -57,8 +62,17 @@ public class Player : MonoBehaviour {
             GameObject[] ships = GameObject.FindGameObjectsWithTag("Ship");
             foreach (GameObject ship in ships) ship.GetComponent<Ship>().takeTurn = true;
             GameObject.Find("ShipSpawner").GetComponent<ShipSpawner>().takeTurn = true;
-        }
+            GameObject[] belts = GameObject.FindGameObjectsWithTag("Belt");
+            foreach (GameObject belt in belts) belt.GetComponent<Animator>().SetBool("move", true);
+            stopBelts = 1;
 
+        }
+        if (stopBelts <= 0)
+        {
+            GameObject[] belts = GameObject.FindGameObjectsWithTag("Belt");
+            foreach (GameObject belt in belts) belt.GetComponent<Animator>().SetBool("move", false);
+        }
+        if (stopBelts > 0) stopBelts = stopBelts - Time.deltaTime;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

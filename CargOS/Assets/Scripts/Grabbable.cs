@@ -81,4 +81,25 @@ public class Grabbable : MonoBehaviour {
             teleporter.GetComponent<TeleporterPad>().cargo = gameObject;
         }
     }
+    public void RollType()
+    {
+        type = Random.Range(0, 3);
+        ChangeColor();
+    }
+    void ChangeColor()
+    {
+        SpriteRenderer render = GetComponent<SpriteRenderer>();
+        switch (type)
+        {
+            case 0:
+                render.color = green;
+                break;
+            case 1:
+                render.color = pink;
+                break;
+            case 2:
+                render.color = orange;
+                break;
+        }
+    }
 }

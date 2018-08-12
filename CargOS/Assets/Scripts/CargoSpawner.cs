@@ -15,6 +15,8 @@ public class CargoSpawner : MonoBehaviour {
 	}
     public void Spawn()
     {
-        Instantiate(shipment, transform.position, transform.rotation);
+        GameObject newCargo = Instantiate(shipment, transform.position, transform.rotation);
+        newCargo.GetComponent<Grabbable>().RollType();
     }
+
 }
