@@ -9,13 +9,20 @@ public class TeleporterPad : MonoBehaviour {
     int teleporterState = 0;
     bool ready = true;
     public GameObject cargo;
-	// Use this for initialization
-	void Start () {
+    Color green = new Color(.1062f, .7264f, .2569f);
+    Color pink = new Color(.7254f, .1058f, .6557f);
+    Color orange = new Color(1f, .3212f, .0f);
+    public int type = 0;
+    // Use this for initialization
+    void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    private void Awake()
+    {
+        ChangeColor();
+    }
+    // Update is called once per frame
+    void Update () {
 
         if (teleporterCooldown <= 0 && ready == false)
         {
@@ -38,6 +45,8 @@ public class TeleporterPad : MonoBehaviour {
         if (teleported == true)
         {
             GetComponentInChildren<ParticleSystem>().Play();
+            type = Random.Range(0, 3);
+            ChangeColor();
             teleporterState = 1;
             GetComponent<Animator>().SetInteger("state", teleporterState);
             ready = false;
@@ -52,5 +61,21 @@ public class TeleporterPad : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
+    }
+    void ChangeColor()
+    {
+        SpriteRenderer render = GetComponent<SpriteRenderer>();
+        switch (type)
+        {
+            case 0:
+                render.color = green;
+                break;
+            case 1:
+                render.color = pink;
+                break;
+            case 2:
+                render.color = orange;
+                break;
+        }
     }
 }

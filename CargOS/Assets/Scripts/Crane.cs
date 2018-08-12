@@ -6,10 +6,10 @@ public class Crane : MonoBehaviour {
     public bool isMoving;
     public Vector3 targetPosition;
     public float speed = .01f;
-    Winch wench;
+    Winch winch;
 	// Use this for initialization
 	void Start () {
-        wench = GetComponentInChildren<Winch>();
+        winch = GetComponentInChildren<Winch>();
 	}
 	
 	// Update is called once per frame
@@ -24,14 +24,21 @@ public class Crane : MonoBehaviour {
             {
                 transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.x);
             }
-            if (wench.grabbedObject != null)
+            if (winch.grabbedObject != null)
             {
-                wench.grabbedObject.transform.position = wench.transform.position;
+                if (winch.parentContainer == null)
+                {
+                    winch.grabbedObject.transform.position = winch.transform.position;
+                }
+                else
+                {
+                    winch.grabbedObject.transform.parent.position = transform.position - winch.grabbedObject.transform.localPosition;
+                }
             }
             if (Mathf.Abs(transform.position.x - targetPosition.x) < .01)
             {
-                wench.targetPosition = targetPosition;
-                wench.isMoving = true;
+                winch.targetPosition = targetPosition;
+                winch.isMoving = true;
                 isMoving = false;
             }
         }

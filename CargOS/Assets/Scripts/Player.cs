@@ -56,6 +56,7 @@ public class Player : MonoBehaviour {
             foreach (GameObject shipment in shipments) shipment.GetComponent<Grabbable>().activateGrabbable();
             GameObject[] ships = GameObject.FindGameObjectsWithTag("Ship");
             foreach (GameObject ship in ships) ship.GetComponent<Ship>().takeTurn = true;
+            GameObject.Find("ShipSpawner").GetComponent<ShipSpawner>().takeTurn = true;
         }
 
     }

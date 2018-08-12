@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ship : MonoBehaviour {
     public bool takeTurn = false;
     float newX;
-    float newXMod = 6;
+    float newXMod = 10;
     // Use this for initialization
     void Start () {
         newX = transform.position.x;

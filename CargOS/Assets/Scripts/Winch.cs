@@ -10,6 +10,7 @@ public class Winch : MonoBehaviour {
     public bool overGrabbable;
     public GameObject grabbaleObject;
     public GameObject grabbedObject;
+    public ParentContainer parentContainer;
     // Use this for initialization
     void Start()
     {
@@ -31,7 +32,22 @@ public class Winch : MonoBehaviour {
             }
             if (grabbedObject != null)
             {
-                grabbedObject.transform.position = transform.position;
+                if(parentContainer == null)
+                {
+                    grabbedObject.transform.position = transform.position;
+                }
+                else
+                {
+                    grabbedObject.transform.parent.position = transform.position - grabbedObject.transform.localPosition;
+                }
+
+                //Grabbable grabbedContainer = grabbedObject.GetComponent<Grabbable>();
+                //Vector3 connectedPosition;
+                //if(grabbedContainer.connectedUp!= null)
+                //{
+                //    //connectedPosition = 
+                //    grabbedContainer.connectedUp.transform.position = grabbedContainer.connectedUp.transform.position + positionChange;
+                //} 
             }
             if (Mathf.Abs(transform.position.y - targetPosition.y) < .04)
             {
@@ -39,20 +55,27 @@ public class Winch : MonoBehaviour {
                 if (overGrabbable == true && grabbedObject == null)
                 {
                     grabbedObject = grabbaleObject;
+                    parentContainer = grabbaleObject.GetComponentInParent<ParentContainer>();
                     grabby = grabbedObject.GetComponent<Grabbable>();
                     grabby.grabbed = true;
                     grabby.beltMovement = false;
                     grabby.onBelt = false;
                     GetComponent<Animator>().SetBool("on", true);
+                    overGrabbable = false;
                 }
-                else if(grabbedObject!=null)
+                else if(grabbedObject!=null && overGrabbable == false)
                 {
                     grabbedObject.GetComponent<Grabbable>().grabbed = false;
                     grabbedObject.GetComponent<Grabbable>().newY = transform.position.y;
                     grabbedObject.GetComponent<Grabbable>().checkTeleportation();
                     grabbedObject = null;
+                    parentContainer = null;
                     GetComponent<Animator>().SetBool("on", false);
-                    
+                    overGrabbable = true;
+                }
+                else if(grabbedObject != null && overGrabbable == true)
+                {
+                    //tell player bad
                 }
                 isMoving = false;
             }
@@ -64,7 +87,10 @@ public class Winch : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Grabbable")
         {
-            grabbaleObject = collision.gameObject;
+            if (grabbedObject == null)
+            {
+                grabbaleObject = collision.gameObject;
+            }
             overGrabbable = true;
         }
     }
@@ -75,4 +101,12 @@ public class Winch : MonoBehaviour {
             overGrabbable = false;
         }
     }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Grabbable")
+    //    {
+    //        if (grabbedObject == null) grabbaleObject = collision.gameObject;
+    //        overGrabbable = true;
+    //    }
+    //}
 }
