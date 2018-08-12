@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crain : MonoBehaviour {
+public class Crane : MonoBehaviour {
     public bool isMoving;
     public Vector3 targetPosition;
     public float speed = .01f;
-    Wench wench;
+    Winch wench;
 	// Use this for initialization
 	void Start () {
-        wench = GetComponentInChildren<Wench>();
+        wench = GetComponentInChildren<Winch>();
 	}
 	
 	// Update is called once per frame

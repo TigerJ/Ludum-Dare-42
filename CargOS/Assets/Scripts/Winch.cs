@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wench : MonoBehaviour {
+public class Winch : MonoBehaviour {
 
     public bool isMoving;
     public Vector3 targetPosition;

@@ -9,48 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1437530408905572}
+  m_RootGameObject: {fileID: 1125089240521794}
   m_IsPrefabAsset: 1
---- !u!1 &1437530408905572
+--- !u!1 &1125089240521794
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4651532861519690}
-  - component: {fileID: 212012544465974226}
-  - component: {fileID: 61376259383952924}
-  - component: {fileID: 50972377327342790}
-  - component: {fileID: 114829957165369272}
+  - component: {fileID: 4782079852045932}
+  - component: {fileID: 212209892280100452}
+  - component: {fileID: 114466885904830166}
+  - component: {fileID: 50626140569619494}
+  - component: {fileID: 61461579184203696}
   m_Layer: 0
-  m_Name: Grabbable
-  m_TagString: Grabbable
+  m_Name: spikes
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4651532861519690
+--- !u!4 &4782079852045932
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437530408905572}
+  m_GameObject: {fileID: 1125089240521794}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 3.5, z: 0}
+  m_LocalPosition: {x: -8.5, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50972377327342790
+--- !u!50 &50626140569619494
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437530408905572}
-  m_BodyType: 1
+  m_GameObject: {fileID: 1125089240521794}
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -63,19 +63,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61376259383952924
+--- !u!61 &61461579184203696
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437530408905572}
+  m_GameObject: {fileID: 1125089240521794}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000023841858, y: 0.019920826}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -86,30 +86,25 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8849025, y: 0.8716221}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114829957165369272
+--- !u!114 &114466885904830166
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437530408905572}
+  m_GameObject: {fileID: 1125089240521794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d16ff87e46acea4985d6d6059862df9, type: 3}
+  m_Script: {fileID: 11500000, guid: 08d870597770e704baf5e227b76143e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeTurn: 0
-  grabbed: 0
-  onBelt: 0
-  beltMovement: 0
-  newY: 0
---- !u!212 &212012544465974226
+--- !u!212 &212209892280100452
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437530408905572}
+  m_GameObject: {fileID: 1125089240521794}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -138,8 +133,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 633118943
   m_SortingLayer: 2
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ced81ffdde08b9d4496d700e797ca406, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 53d59ea5350e6a949a64e9ec5a479b7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     string lastMoved;
-    public Crain crain;
+    public Crane crane;
     float moveTimer = 0;
-    float moveSpeed = 0.25f;
+    float moveSpeed = 0.05f;
     float turnTimer = 3;
     float gameSpeed = 3;
 	// Use this for initialization
@@ -43,8 +43,8 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetButtonDown("Action"))
         {
-            crain.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
-            crain.isMoving = true;
+            crane.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
+            crane.isMoving = true;
         }
 
 
