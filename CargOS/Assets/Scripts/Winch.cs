@@ -11,6 +11,7 @@ public class Winch : MonoBehaviour {
     public GameObject grabbaleObject;
     public GameObject grabbedObject;
     public GameObject light;
+    public GameObject currentCommand;
     public ParentContainer parentContainer;
     public bool overTeleporter;
     bool overBelt;
@@ -73,6 +74,7 @@ public class Winch : MonoBehaviour {
                         isMoving = false;
                         GetComponentInParent<Crane>().targets.RemoveAt(0);
                         GetComponentInParent<Crane>().checkTargets();
+                        Destroy(currentCommand);
                         grabby.onBelt = false;
                         return;
                     }
@@ -86,6 +88,7 @@ public class Winch : MonoBehaviour {
                             isMoving = false;
                             GetComponentInParent<Crane>().targets.RemoveAt(0);
                             GetComponentInParent<Crane>().checkTargets();
+                            Destroy(currentCommand);
                             return;
                         }
                     }
@@ -109,6 +112,7 @@ public class Winch : MonoBehaviour {
                 isMoving = false;
                 GetComponentInParent<Crane>().targets.RemoveAt(0);
                 GetComponentInParent<Crane>().checkTargets();
+                Destroy(currentCommand);
             }
             
             //if ((direction == "down" && transform.position.y >= targetPosition.y) || (direction == "up" && transform.position.y <= targetPosition.y))

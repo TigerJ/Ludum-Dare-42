@@ -53,6 +53,7 @@ public class Player : MonoBehaviour {
         {
             //crane.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
             //spawn some number thing here to show on the screen what is next?
+            Instantiate(movementTarget, transform.position, transform.rotation);
             crane.targets.Add(new Vector3(transform.position.x + .5f, transform.position.y, transform.position.z));
             crane.checkTargets();
         }
