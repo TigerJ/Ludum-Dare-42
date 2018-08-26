@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     public Image healthbar;
     public Text scoreValue;
     int score = 0;
+    public GameObject movementTarget;
     // Use this for initialization
     void Start () {
 		
@@ -50,12 +51,10 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetButtonDown("Action"))
         {
-            crane.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
-            crane.isMoving = true;
-            if (crane.transform.position.x >= transform.position.x) crane.direction = "left";
-            else crane.direction = "right";
-            if (crane.winch.transform.position.y >= transform.position.y) crane.winch.direction = "up";
-            else crane.winch.direction = "down";
+            //crane.targetPosition = new Vector3(transform.position.x + .5f,transform.position.y,transform.position.z);
+            //spawn some number thing here to show on the screen what is next?
+            crane.targets.Add(new Vector3(transform.position.x + .5f, transform.position.y, transform.position.z));
+            crane.checkTargets();
         }
 
 

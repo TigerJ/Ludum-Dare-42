@@ -10,6 +10,7 @@ public class Winch : MonoBehaviour {
     public bool overGrabbable;
     public GameObject grabbaleObject;
     public GameObject grabbedObject;
+    public GameObject light;
     public ParentContainer parentContainer;
     public bool overTeleporter;
     bool overBelt;
@@ -18,6 +19,7 @@ public class Winch : MonoBehaviour {
     public AudioSource item_drop;
     public AudioSource item_pickup;
     public AudioSource bad_player;
+    Vector3 velo;
     // Use this for initialization
     void Start()
     {
@@ -29,16 +31,20 @@ public class Winch : MonoBehaviour {
     {
         if (isMoving == true)
         {
-            if (transform.position.y < targetPosition.y)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y + speed, transform.position.y);
-            }
-            else if (transform.position.y > targetPosition.y)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.y);
-            }
+            Vector3 dampTar = new Vector3(transform.position.x, targetPosition.y, 0f);
+            //transform.position = Vector3.SmoothDamp(transform.position, dampTar, ref velo, .05f);
+            transform.position = Vector3.MoveTowards(transform.position, dampTar, .2f);
+            //if (transform.position.y < targetPosition.y)
+            //{
+            //    transform.position = new Vector3(transform.position.x, transform.position.y + speed, transform.position.y);
+            //}
+            //else if (transform.position.y > targetPosition.y)
+            //{
+            //    transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.y);
+            //}
             if (grabbedObject != null) grabbedObject.transform.position = transform.position;
-            if ((direction == "down" && transform.position.y >= targetPosition.y) || (direction == "up" && transform.position.y <= targetPosition.y))
+            //Debug.Log(Vector3.Distance(transform.position, targetPosition));
+            if (Vector3.Distance(transform.position,targetPosition) < .51)
             {
                 Grabbable grabby;
                 if (overGrabbable == true && grabbedObject == null)
@@ -51,9 +57,12 @@ public class Winch : MonoBehaviour {
                     grabby.beltMovement = false;
                     grabby.onBelt = false;
                     GetComponent<Animator>().SetBool("on", true);
+                    light.GetComponent<Animator>().SetBool("on", true);
+                    light.GetComponent<WinchLight>().type = grabby.type;
+                    light.GetComponent<WinchLight>().changeColor();
                     overGrabbable = false;
                 }
-                else if(grabbedObject!=null && overGrabbable == false)
+                else if (grabbedObject != null && overGrabbable == false)
                 {
                     grabby = grabbedObject.GetComponent<Grabbable>();
                     if (overBelt == true)
@@ -62,6 +71,8 @@ public class Winch : MonoBehaviour {
                         //tell the player bad
                         bad_player.Play();
                         isMoving = false;
+                        GetComponentInParent<Crane>().targets.RemoveAt(0);
+                        GetComponentInParent<Crane>().checkTargets();
                         grabby.onBelt = false;
                         return;
                     }
@@ -73,6 +84,8 @@ public class Winch : MonoBehaviour {
                             //tell the player bad
                             bad_player.Play();
                             isMoving = false;
+                            GetComponentInParent<Crane>().targets.RemoveAt(0);
+                            GetComponentInParent<Crane>().checkTargets();
                             return;
                         }
                     }
@@ -80,20 +93,28 @@ public class Winch : MonoBehaviour {
                     grabby.onBelt = false;
                     grabby.grabbed = false;
                     grabby.newY = transform.position.y;
-                    if(overTeleporter) grabby.checkTeleportation();
+                    if (overTeleporter) grabby.checkTeleportation();
                     grabbedObject = null;
                     parentContainer = null;
                     GetComponent<Animator>().SetBool("on", false);
+                    light.GetComponent<Animator>().SetBool("on", false);
                     overGrabbable = true;
                 }
-                else if(grabbedObject != null && overGrabbable == true)
+                else if (grabbedObject != null && overGrabbable == true)
                 {
                     //tell player bad
                     bad_player.Play();
                     Debug.Log("over shipment");
                 }
                 isMoving = false;
+                GetComponentInParent<Crane>().targets.RemoveAt(0);
+                GetComponentInParent<Crane>().checkTargets();
             }
+            
+            //if ((direction == "down" && transform.position.y >= targetPosition.y) || (direction == "up" && transform.position.y <= targetPosition.y))
+            //{
+                
+            //}
             
         }
         

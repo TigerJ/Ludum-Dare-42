@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Crane : MonoBehaviour {
+    public List<Vector3> targets;
     public bool isMoving;
     public Vector3 targetPosition;
     public float speed = .01f;
     public string direction;
     public string directionY;
     public Winch winch;
+    Vector3 velo;
 	// Use this for initialization
 	void Start () {
         winch = GetComponentInChildren<Winch>();
@@ -18,14 +20,9 @@ public class Crane : MonoBehaviour {
 	void Update () {
 		if(isMoving)
         {
-            if(transform.position.x < targetPosition.x)
-            {
-                transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.x);
-            }
-            else if(transform.position.x > targetPosition.x)
-            {
-                transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.x);
-            }
+            Vector3 dampTarget = new Vector3(targetPosition.x, transform.position.y, 0);
+            //transform.position = Vector3.SmoothDamp(transform.position, dampTarget, ref velo, .4f);
+            transform.position = Vector3.MoveTowards(transform.position, dampTarget, .04f);
             if (winch.grabbedObject != null)
             {
                 if (winch.parentContainer == null)
@@ -37,7 +34,9 @@ public class Crane : MonoBehaviour {
                     winch.grabbedObject.transform.parent.position = transform.position - winch.grabbedObject.transform.localPosition;
                 }
             }
-            if ((direction == "left" && transform.position.x <= targetPosition.x) || direction == "right" && transform.position.x >= targetPosition.x)
+            // target less transform will always be positive
+
+            if (Mathf.Abs(targetPosition.x)-Mathf.Abs(transform.position.x) <.01 && Mathf.Abs(targetPosition.x) - Mathf.Abs(transform.position.x) > -.01)
             {
                 winch.targetPosition = targetPosition;
                 winch.isMoving = true;
@@ -46,4 +45,12 @@ public class Crane : MonoBehaviour {
         }
         
 	}
+    public void checkTargets()
+    {
+        if (targets.Count > 0)
+        {
+            targetPosition = targets[0];
+            isMoving = true;
+        }
+    }
 }
